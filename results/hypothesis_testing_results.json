@@ -1,0 +1,48 @@
+{
+  "analysis_date": "2025-08-15T01:29:05.832247",
+  "dataset_info": {
+    "total_observations": 10000,
+    "date_range": "2014-02-01 00:00:00.000000000 to 2015-08-31 00:00:00.000000000",
+    "provinces": 4,
+    "zip_codes": 6011
+  },
+  "hypothesis_results": {
+    "H1: Provincial Risk Differences": {
+      "test": "Kruskal-Wallis",
+      "statistic": 12.36684422726084,
+      "p_value": 0.00622655692725132,
+      "effect_size": 0.0009370592464246539,
+      "significant": "True",
+      "interpretation": "Negligible"
+    },
+    "H2: Zip Code Risk Differences": {
+      "test": "Insufficient data",
+      "statistic": NaN,
+      "p_value": NaN,
+      "effect_size": NaN,
+      "significant": false,
+      "interpretation": "Insufficient data"
+    },
+    "H3: Zip Code Profit Margins": {
+      "test": "Insufficient data",
+      "statistic": NaN,
+      "p_value": NaN,
+      "effect_size": NaN,
+      "significant": false,
+      "interpretation": "Insufficient data"
+    },
+    "H4: Gender Risk Differences": {
+      "test": "Mann-Whitney U test",
+      "statistic": 12506068.0,
+      "p_value": 0.9621949799223403,
+      "effect_size": -0.0005463132376972712,
+      "significant": "False",
+      "interpretation": "Negligible"
+    }
+  },
+  "summary_statistics": {
+    "significant_hypotheses": 1,
+    "total_hypotheses": 4,
+    "significance_rate": 0.25
+  }
+}
