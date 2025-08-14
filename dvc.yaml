@@ -1,0 +1,36 @@
+stages:
+  data_preprocessing:
+    cmd: python modules/data_processing.py
+    deps:
+    - data/insurance_data.csv
+    - modules/data_processing.py
+    outs:
+    - data/processed/
+    
+  eda_analysis:
+    cmd: jupyter nbconvert --execute notebooks/1_EDA.ipynb
+    deps:
+    - notebooks/1_EDA.ipynb
+    - data/processed/
+    - modules/visualization.py
+    outs:
+    - outputs/eda_results/
+    
+  hypothesis_testing:
+    cmd: jupyter nbconvert --execute notebooks/2_Hypothesis_Testing.ipynb
+    deps:
+    - notebooks/2_Hypothesis_Testing.ipynb
+    - data/processed/
+    - modules/stats_tests.py
+    outs:
+    - outputs/hypothesis_results/
+    
+  predictive_modeling:
+    cmd: jupyter nbconvert --execute notebooks/3_Predictive_Modeling.ipynb
+    deps:
+    - notebooks/3_Predictive_Modeling.ipynb
+    - data/processed/
+    - modules/modeling_utils.py
+    outs:
+    - models/
+    - outputs/model_results/

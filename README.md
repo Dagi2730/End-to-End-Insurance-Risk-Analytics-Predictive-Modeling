@@ -1,48 +1,80 @@
-# ACIS Insurance Analytics – Task 1: EDA Summary
+# Task 2: Statistical Hypothesis Testing - Insurance Risk Analysis
 
-## Overview
-This task focuses on **exploratory data analysis (EDA)** of the historical car insurance dataset from AlphaCare Insurance Solutions (ACIS). The goal is to understand the dataset, identify trends, highlight potential risks, and uncover insights that can inform marketing and pricing strategies.
+## 📄 Overview
+This task performs statistical hypothesis testing on an insurance dataset of **10,000 records** to identify significant differences in **risk profiles** and **profit margins** across provinces, zip codes, and gender. The results guide feature engineering for predictive modeling.
 
-## Dataset
-- **Records:** 10,000  
-- **Time Period:** February 2014 – August 2015  
-- **Provinces:** 4  
-- **Zip Codes:** 6,011  
-- **Vehicle Types:** 4  
+**Dataset Features:**  
+- PolicyID  
+- Province  
+- ZipCode  
+- Gender  
+- VehicleType  
+- VehicleIntroDate  
+- CustomValueEstimate  
+- TotalPremium  
+- TotalClaims  
+- TransactionMonth  
 
-## Key Findings
+---
 
-### Financial Performance
-- **Total Premium:** R153,995,331  
-- **Total Claims:** R91,261,607  
-- **Profit:** R62,733,724  
-- **Claims Ratio:** 0.678  
-- **Profit Margin:** 40.7%  
+## 🧪 Hypotheses Tested
 
-### Geographic Insights
-- **Highest Risk Province:** Western Cape (Claims Ratio 0.610)  
-- **Lowest Risk Province:** Gauteng (Claims Ratio 0.552)  
-- **Largest Premium Market:** Gauteng (R41,733,170)  
+| Hypothesis | Description | Test | Result | Effect Size | Business Impact |
+|------------|-------------|------|--------|------------|----------------|
+| H1 | Provincial Risk Differences | Kruskal-Wallis | ✅ Significant | Negligible (0.0009) | HIGH – province-specific adjustments recommended |
+| H2 | Zip Code Risk Differences | Kruskal-Wallis | ❌ Not Significant | N/A | LOW – current approach adequate |
+| H3 | Zip Code Profit Margins | Kruskal-Wallis | ❌ Not Significant | N/A | LOW – current approach adequate |
+| H4 | Gender Risk Differences | Mann-Whitney U | ❌ Not Significant | Negligible (-0.0005) | LOW – current approach adequate |
 
-### Vehicle Insights
-- **Most Common Vehicle:** Sedan (25.9% of policies)  
-- **Vehicle Type Diversity:** 4 types  
+---
 
-### Customer Demographics
-- Female: 50.4%  
-- Male: 49.6%  
+## 🔍 Key Findings
 
-### Data Quality
-- **Missing Values:** 0  
-- **Duplicates:** 0  
-- **Data Completeness:** 100%  
+1. **Provincial Risk Differences (H1)**  
+   - Statistically significant differences detected across provinces.  
+   - Effect size is negligible but highlights the need for **province-specific risk adjustments**.  
+   - Significant post-hoc pairs:  
+     - KwaZulu-Natal vs Eastern Cape ✅  
+     - Eastern Cape vs Western Cape ✅  
 
-### Outlier Analysis
-- **Premium Outliers:** 38 (0.4%)  
-- **Highest Premium:** R38,586  
-- **Premium Range (IQR):** R11,802 – R18,783  
+2. **Zip Code Differences (H2 & H3)**  
+   - Insufficient data for meaningful analysis (H2: risk, H3: profit margins).  
+   - Not significant; minimal impact on modeling decisions.  
 
-## Next Steps
-- Task 2: Implement **data version control** using DVC  
-- Task 3: Conduct **A/B hypothesis testing**  
-- Task 4: Develop **predictive models for risk and premium optimization**
+3. **Gender Differences (H4)**  
+   - No significant differences detected.  
+   - Effect size is negligible; gender may not be a critical feature.  
+
+---
+
+## 📊 Executive Summary
+
+- **Total hypotheses tested:** 4  
+- **Significant hypotheses:** 1/4 (25%)  
+- **Overall implication:** Geographic (province-level) differences should be considered for pricing and risk modeling. Other factors (zip code, gender) are less influential in this dataset.
+
+---
+
+## 💼 Strategic Recommendations
+
+1. **Geographic Pricing:** Implement **province-specific risk adjustments**.  
+2. **Regional Analysis:** Conduct further analysis on provincial markets to optimize risk prediction.  
+3. **Feature Engineering:** Include **province** as a key predictive feature in modeling.  
+4. **Zip Code & Gender:** Consider for exploratory feature engineering but not critical.  
+
+---
+
+## ⚠️ Statistical Notes
+
+- **Sample Size:** 10,000 (high statistical power)  
+- **Significance Level:** α = 0.05  
+- **Multiple Comparisons:** Bonferroni corrections applied  
+- **Assumptions:** Non-parametric tests used when normality or equal variance assumptions were violated  
+- **Effect Sizes:** Reported for practical significance assessment  
+
+---
+
+## 💾 Results Storage
+
+All hypothesis testing results are saved as JSON:  
+
