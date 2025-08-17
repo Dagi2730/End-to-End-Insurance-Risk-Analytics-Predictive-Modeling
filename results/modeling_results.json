@@ -1,0 +1,90 @@
+{
+  "analysis_date": "2025-08-17T16:39:44.171279",
+  "dataset_info": {
+    "total_samples": 10000,
+    "features_original": 7,
+    "features_processed": 10383,
+    "target_variable": "TotalClaims"
+  },
+  "data_splits": {
+    "train_size": 6000,
+    "validation_size": 2000,
+    "test_size": 2000
+  },
+  "model_comparison": [
+    {
+      "Model": "Ridge Regression",
+      "Train_R\u00b2": 0.8659,
+      "Val_R\u00b2": -0.0403,
+      "Train_RMSE": 2691.0563,
+      "Val_RMSE": 7451.5022,
+      "Train_MAE": 2203.1782,
+      "Val_MAE": 6159.2454,
+      "Val_MAPE": NaN,
+      "Training_Time": 4.7166,
+      "Overfit_Score": 0.9062
+    },
+    {
+      "Model": "Lasso Regression",
+      "Train_R\u00b2": 0.6177,
+      "Val_R\u00b2": -0.0593,
+      "Train_RMSE": 4544.6094,
+      "Val_RMSE": 7519.1094,
+      "Train_MAE": 4022.1872,
+      "Val_MAE": 6151.414,
+      "Val_MAPE": NaN,
+      "Training_Time": 2.4955,
+      "Overfit_Score": 0.6769
+    },
+    {
+      "Model": "Random Forest",
+      "Train_R\u00b2": 0.838,
+      "Val_R\u00b2": -0.1634,
+      "Train_RMSE": 2958.0861,
+      "Val_RMSE": 7879.9464,
+      "Train_MAE": 2347.3604,
+      "Val_MAE": 6303.7397,
+      "Val_MAPE": NaN,
+      "Training_Time": 1222.7044,
+      "Overfit_Score": 1.0014
+    },
+    {
+      "Model": "XGBoost",
+      "Train_R\u00b2": 0.1645,
+      "Val_R\u00b2": 0.0009,
+      "Train_RMSE": 6718.0867,
+      "Val_RMSE": 7302.4903,
+      "Train_MAE": 5690.6953,
+      "Val_MAE": 6035.3723,
+      "Val_MAPE": NaN,
+      "Training_Time": 6.1326,
+      "Overfit_Score": 0.1636
+    }
+  ],
+  "best_model": {
+    "name": "XGBoost",
+    "validation_performance": {
+      "MAE": 6035.372300000671,
+      "MSE": 53326365.19117581,
+      "RMSE": 7302.490341737935,
+      "R\u00b2": 0.0008944529851098171,
+      "Explained Variance": 0.0017300550728553965
+    },
+    "generalization_score": -0.16359913122124148,
+    "business_ready": true
+  },
+  "feature_engineering": {
+    "numerical_features": [
+      "CustomValueEstimate",
+      "TotalPremium"
+    ],
+    "categorical_features": [
+      "Province",
+      "ZipCode",
+      "Gender",
+      "VehicleType",
+      "VehicleIntroDate"
+    ],
+    "new_features_created": 0
+  }
+}
