@@ -51,10 +51,6 @@ The pipeline includes:
 - Test RMSE: 7,441.65  
 - Residual standard deviation: 7,441.21  
 
-> ⚠️ Note: Model shows slight overfitting and needs improvement. Recommended next steps include cross-validation, feature reduction, or additional data.
-
----
-
 ## Model Interpretability
 **SHAP Analysis:**  
 Top 15 features contributing to premium prediction:
@@ -96,3 +92,5 @@ from prediction_template import load_model, predict_premium
 
 model, preprocessor = load_model()
 predictions = predict_premium(new_data, model, preprocessor)
+  
+  
