@@ -1,96 +1,32 @@
-# AlphaCare Insurance Premium Prediction
+# Task 4: Predictive Modeling for Risk-Based Premiums
 
 ## Project Overview
-This project implements an end-to-end predictive analytics pipeline for **insurance premium prediction** using historical policy and claims data. The primary goal is to help AlphaCare Insurance Solutions optimize pricing, assess risk, and improve decision-making using machine learning.
+Task 4 focuses on developing and evaluating **predictive models** that form the core of a **dynamic, risk-based insurance pricing system**. The goal is to predict **claim severity** and optimize **premiums**, enabling data-driven, financially sound decisions for insurance pricing.
 
-The pipeline includes:
-
-- Advanced **feature engineering** (risk-based, vehicle, geographic, demographic, temporal, and interaction features)
-- Comprehensive **data preprocessing and feature expansion**
-- **Model training and evaluation** using multiple regression algorithms
-- **Model interpretability** via SHAP for feature importance analysis
-- Final **deployment-ready model** with prediction template
+This task includes:
+- Claim Severity Prediction (Risk Model)
+- Premium Optimization (Pricing Framework)
+- Statistical Modeling & Interpretability
 
 ---
 
-## Dataset
-- **Samples:** 10,000 policies
-- **Original Features:** 10
-- **Engineered Features:** 24 (14 new features added)
-- **Primary Target Variable:** `TotalPremium`
-- **Target Statistics:**
-  - Mean: 16,076.84
-  - Range: 16,076.84 – 16,076.84
+## Data Summary
+
+**Claims Subset Shape:** `(8415, 9)`
+
+| PolicyID   | Province        | ZipCode | Gender | VehicleType | VehicleIntroDate               | CustomValueEstimate | TotalPremium  | TransactionMonth               |
+|-----------|----------------|---------|--------|-------------|--------------------------------|------------------|---------------|-------------------------------|
+| POL_000000 | KwaZulu-Natal   | 4122    | Female | SUV         | 2000-01-01 00:00:00           | 248845.50         | 16076.84      | 2014-02-01 00:00:00           |
+| POL_000001 | Eastern Cape    | 9167    | Male   | Hatchback   | 2000-01-01 18:24:35           | 210532.78         | 19823.19      | 2014-02-01 01:22:57           |
+| POL_000002 | Gauteng         | 6190    | Female | Sedan       | 2000-01-02 12:49:10           | 169778.61         | 15129.38      | 2014-02-01 02:45:54           |
+| POL_000004 | KwaZulu-Natal   | 8727    | Male   | Hatchback   | 2000-01-04 01:38:21           | 162682.61         | 13500.24      | 2014-02-01 05:31:48           |
+| POL_000005 | Eastern Cape    | 2797    | Male   | Truck       | 2000-01-04 20:02:57           | 241486.69         | 11442.04      | 2014-02-01 06:54:45           |
+
+**Train-Test Split:**  
+- Training set: `(6732, 9)`  
+- Test set: `(1683, 9)`  
 
 ---
 
-## Feature Engineering
-- Risk-based features (`RiskScore`, `ClaimRate`, etc.)
-- Vehicle-related features (`HighRiskVehicle`, `VehicleType`)
-- Geographic features (`ProvinceRiskScore`, `ZipCode`)
-- Demographic features (`GenderRisk`)
-- Temporal features (`Month`, `Quarter`)
-- Interaction and statistical features
+## Modeling Goals
 
-**Total features after processing:** 17 original + engineered → 10383 processed features  
-
----
-
-## Model Training and Evaluation
-**Models trained:**
-
-- Ridge Regression  
-- Lasso Regression  
-- Random Forest Regressor  
-- XGBoost Regressor  
-
-**Best Model Selected:** XGBoost  
-- Validation R²: 0.0009  
-- Validation RMSE: 7,302.49  
-- Test R²: -0.0112  
-- Test RMSE: 7,441.65  
-- Residual standard deviation: 7,441.21  
-
-## Model Interpretability
-**SHAP Analysis:**  
-Top 15 features contributing to premium prediction:
-
-1. `VehicleType_SUV`  
-2. `TotalPremium`  
-3. `CustomValueEstimate`  
-4. `ZipCode_8777`  
-5. `ZipCode_2080`  
-6. `ZipCode_3829`  
-7. `ZipCode_1948`  
-8. `Province_KwaZulu-Natal`  
-9. `ZipCode_5250`  
-10. `ZipCode_5759`  
-11. `ZipCode_8082`  
-12. `ZipCode_7168`  
-13. `ZipCode_3348`  
-14. `ZipCode_7452`  
-15. `ZipCode_7792`  
-
-- Base prediction (expected value): 9,126.56  
-- Feature contribution range: [-3,431.18, 8,469.35]  
-
----
-
-## Saved Artifacts
-All models and results are saved for deployment:
-
-- **Best Model:** `../models/best_model_xgboost.joblib`  
-- **Preprocessor:** `../models/preprocessor.joblib`  
-- **Prediction Template:** `../models/prediction_template.py`  
-- **Modeling Results:** `../results/modeling_results.json`  
-- **Deployment Info:** `../models/deployment_info.json`  
-
-**Prediction template** allows easy integration for new data:
-
-```python
-from prediction_template import load_model, predict_premium
-
-model, preprocessor = load_model()
-predictions = predict_premium(new_data, model, preprocessor)
-  
-  
