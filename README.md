@@ -30,37 +30,3 @@ This task includes:
 
 ## Modeling Goals
 
-### Claim Severity Prediction (Risk Model)
-- **Objective:** Predict `TotalClaims` for policies with claims.
-- **Target Variable:** `TotalClaims` (subset of claims > 0)
-- **Evaluation Metrics:** RMSE (Root Mean Squared Error), R²
-- **Purpose:** Estimate financial liability per policy
-
-### Premium Optimization (Pricing Framework)
-- **Objective:** Predict appropriate insurance premium
-- **Advanced Approach:**  
-  Premium = (Predicted Probability of Claim × Predicted Claim Severity) + Expense Loading + Profit Margin
-- **Evaluation Metrics:** RMSE, R² for regression; Accuracy, Precision, Recall, F1-Score for claim probability
-
----
-
-## Model Training & Evaluation
-
-### Claim Severity Models
-- ✅ LinearRegression trained successfully  
-- ✅ RandomForest trained successfully  
-- ✅ XGBoost trained successfully  
-
-| Model               | RMSE     | R²       |
-|--------------------|----------|----------|
-| LinearRegression    | 6716.93 | 0.0213   |
-| RandomForest        | 6988.94 | -0.0596  |
-| XGBoost             | 6763.29 | 0.0077   |
-
-**Baseline Metrics:**  
-- RMSE: 6790.18  
-- R²: -0.0002  
-
-**Best XGBoost Parameters:**  
-```json
-{'subsample': 1, 'n_estimators': 100, 'max_depth': 3, 'learning_rate': 0.1}
