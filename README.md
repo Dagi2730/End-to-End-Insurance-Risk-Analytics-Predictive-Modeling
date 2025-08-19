@@ -1,98 +1,56 @@
-# AlphaCare Insurance Premium Prediction
+# AlphaCare Insurance Premium Prediction – Deployment Branch
 
 ## Project Overview
-This project implements an end-to-end predictive analytics pipeline for **insurance premium prediction** using historical policy and claims data. The primary goal is to help AlphaCare Insurance Solutions optimize pricing, assess risk, and improve decision-making using machine learning.
+This branch contains the **deployment-ready system** for AlphaCare Insurance Premium Prediction. It includes a **FastAPI backend** for serving model predictions and a **Streamlit dashboard** for interactive risk analytics. The goal is to provide real-time premium and risk prediction for new insurance policies, supporting data-driven decision-making.
 
-The pipeline includes:
+Key features:
 
-- Advanced **feature engineering** (risk-based, vehicle, geographic, demographic, temporal, and interaction features)
-- Comprehensive **data preprocessing and feature expansion**
-- **Model training and evaluation** using multiple regression algorithms
-- **Model interpretability** via SHAP for feature importance analysis
-- Final **deployment-ready model** with prediction template
-
----
-
-## Dataset
-- **Samples:** 10,000 policies
-- **Original Features:** 10
-- **Engineered Features:** 24 (14 new features added)
-- **Primary Target Variable:** `TotalPremium`
-- **Target Statistics:**
-  - Mean: 16,076.84
-  - Range: 16,076.84 – 16,076.84
+- REST API for **risk prediction** using pre-trained XGBoost model
+- Interactive **Streamlit dashboard** for policy input and portfolio overview
+- Integration of **preprocessing pipeline** for consistent model input
+- Ready for **local or cloud deployment**
 
 ---
 
-## Feature Engineering
-- Risk-based features (`RiskScore`, `ClaimRate`, etc.)
-- Vehicle-related features (`HighRiskVehicle`, `VehicleType`)
-- Geographic features (`ProvinceRiskScore`, `ZipCode`)
-- Demographic features (`GenderRisk`)
-- Temporal features (`Month`, `Quarter`)
-- Interaction and statistical features
+## API Usage
+**Endpoint:** `POST /predict`  
 
-**Total features after processing:** 17 original + engineered → 10383 processed features  
+**Request Example (JSON):**
+```json
+{
+  "Age": 35,
+  "Gender": "Male",
+  "VehicleType": "SUV",
+  "Province": "Gauteng",
+  "CustomValueEstimate": 25000.0,
+  "TotalPremium": 1800.0,
+  "ZipCode": 4122,
+  "VehicleIntroDate": "2020-01-01"
+}
 
----
+Response Example:
 
-## Model Training and Evaluation
-**Models trained:**
+{
+  "predicted_risk": 9866.6357421875
+}
 
-- Ridge Regression  
-- Lasso Regression  
-- Random Forest Regressor  
-- XGBoost Regressor  
 
-**Best Model Selected:** XGBoost  
-- Validation R²: 0.0009  
-- Validation RMSE: 7,302.49  
-- Test R²: -0.0112  
-- Test RMSE: 7,441.65  
-- Residual standard deviation: 7,441.21  
+Run API locally:
 
-> ⚠️ Note: Model shows slight overfitting and needs improvement. Recommended next steps include cross-validation, feature reduction, or additional data.
+cd api
+python main.py
 
----
 
-## Model Interpretability
-**SHAP Analysis:**  
-Top 15 features contributing to premium prediction:
+Access at http://0.0.0.0:8000
 
-1. `VehicleType_SUV`  
-2. `TotalPremium`  
-3. `CustomValueEstimate`  
-4. `ZipCode_8777`  
-5. `ZipCode_2080`  
-6. `ZipCode_3829`  
-7. `ZipCode_1948`  
-8. `Province_KwaZulu-Natal`  
-9. `ZipCode_5250`  
-10. `ZipCode_5759`  
-11. `ZipCode_8082`  
-12. `ZipCode_7168`  
-13. `ZipCode_3348`  
-14. `ZipCode_7452`  
-15. `ZipCode_7792`  
+Dashboard Usage
 
-- Base prediction (expected value): 9,126.56  
-- Feature contribution range: [-3,431.18, 8,469.35]  
+Launch dashboard:
 
----
+cd dashboard
+python run_dashboard.py
 
-## Saved Artifacts
-All models and results are saved for deployment:
 
-- **Best Model:** `../models/best_model_xgboost.joblib`  
-- **Preprocessor:** `../models/preprocessor.joblib`  
-- **Prediction Template:** `../models/prediction_template.py`  
-- **Modeling Results:** `../results/modeling_results.json`  
-- **Deployment Info:** `../models/deployment_info.json`  
+Default port: 8501
 
-**Prediction template** allows easy integration for new data:
-
-```python
-from prediction_template import load_model, predict_premium
-
-model, preprocessor = load_model()
-predictions = predict_premium(new_data, model, preprocessor)
+Enter policy details in the sidebar to get predicted risk level.
